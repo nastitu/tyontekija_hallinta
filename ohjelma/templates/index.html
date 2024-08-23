@@ -2,5 +2,34 @@
 
 {% block content %}
 
-<h1>Tämä on aloitussivu</h1>
+<h1>Työntekijähallinta</h1>
+
+
+{{t}}<br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Sukunimi</th>
+        <th scope="col">Etunimi</th>
+        <th scope="col">ID</th>
+      </tr>
+    </thead>
+
+    {% for t in tyontekijat %}
+    <tbody>
+      <tr>
+        <th scope="row">#</th>
+        <td>{{t.sukunimi}}</td>
+        <td>{{t.etunimi}}</td>
+        <td><a href="{% url "muokkaa_t" t.id %}">{{t.id}}</a></td>
+      </tr>
+      
+      
+    </tbody>
+    {% endfor %}
+  </table>
+
+
+
 {% endblock content %}    

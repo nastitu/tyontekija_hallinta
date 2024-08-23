@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form  method = "POST">
+    {% csrf_token %}
+    {{form.as_p }}
+    
+    <button class="btn btn-primary" type="submit">Tallenna</button>
+    <a class="btn btn-primary" href="{% url "index" %}" role="button">Takaisin</a>
+    
+</form>
+
+
+{% endblock content %}
