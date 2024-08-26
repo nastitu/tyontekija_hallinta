@@ -6,7 +6,7 @@
 
 
 {{t}}<br>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -19,7 +19,7 @@
     {% for t in tyontekijat %}
     <tbody>
       <tr>
-        <th scope="row">#</th>
+        <th scope="row">{{forloop.counter}}</th>
         <td>{{t.sukunimi}}</td>
         <td>{{t.etunimi}}</td>
         <td><a href="{% url "muokkaa_t" t.id %}">{{t.id}}</a></td>
