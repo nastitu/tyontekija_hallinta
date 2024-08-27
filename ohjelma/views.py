@@ -30,13 +30,14 @@ def lisää_työntekijä(request):
     }
     return render(request, "tyontekija.html", context)
 
+@login_required
 def poista_työntekijä(request, pk):
     työntekijä=Työntekijä.objects.get(pk=pk)
     työntekijä.delete()
     messages.success(request, "Työntekijä poistettu!")
     return redirect("index")
             
-
+@login_required
 def muokkaa_työntekijää(request, pk):
     työntekijä=Työntekijä.objects.get(pk=pk)
 
@@ -56,10 +57,3 @@ def muokkaa_työntekijää(request, pk):
     }
     return render(request, "tyontekija.html", context)
 
-def kirjaudu_sisään(request):
-    return render(request, "kirjaudu.html", {})
-
-def kirjaudu_ulos(request):
-    logout(request)
-    messages.success(request, "Kirjauduttu ulos")
-    return redirect("index")

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ohjelma',
+    'käyttäjät',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "sisaan"
+LOGIN_URL = "käyttäjät:sisaan"

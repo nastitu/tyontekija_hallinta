@@ -2,7 +2,26 @@
 
 {% block content %}
 
-<p>Tähän tulee kirjautuminen</p>
+<h1>Kirjaudu</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">Käyttäjätunnus</label>
+      <div class="col-sm-5">
+        <input type="text" class="form-control" id="username" name="username">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-2 col-form-label">Salasana</label>
+      <div class="col-sm-5">
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+  </form>
 
 
 {% endblock content %}

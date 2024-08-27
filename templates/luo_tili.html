@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p>Luo tili</p>
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Käyttäjätunnus</label>
+        <div class="col-sm-5">
+            {{form.username}}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Salasana</label>
+        <div class="col-sm-5">
+          {{form.password1}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Salasana uudestaan</label>
+        <div class="col-sm-5">
+            {{form.password2}}
+        </div>
+      </div>
+    
+    <button type="submit" class="btn btn-primary">Luo tili</button>
+</form>
+
+{% endblock content %}
