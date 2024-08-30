@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Vaihda salasana</h2>
+<p>Hei {{request.user.username}}</p>
+<br>
+<form method="POST">
+
+    {% csrf_token %}
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Vanha salasana</label>
+        <div class="col-sm-5">
+            {{form.old_password}}
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Uusi salasana</label>
+        <div class="col-sm-5">
+          {{form.new_password1}}
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Salasana uudestaan</label>
+        <div class="col-sm-5">
+            {{form.new_password2}}
+        </div>
+      </div>
+    
+    <button type="submit" class="btn btn-primary">Vaihda salasana</button>
+</form>
+
+{% endblock content %}

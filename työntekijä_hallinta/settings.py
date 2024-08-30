@@ -114,12 +114,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Helsinki'
 
 USE_I18N = True
 
 USE_TZ = True
 
+# DATE_INPUT_FORMATS=[
+#     '%d.%m.%Y',
+# ]
+
+
+# DATETIME_INPUT_FORMATS=[
+#     '%d.%m.%Y %H:%M',
+# ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

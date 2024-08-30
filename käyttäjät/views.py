@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 # Create your views here.
 
 def kirjaudu_sisään(request):
@@ -43,3 +44,22 @@ def luo_tili(request):
     }
 
     return render(request, "luo_tili.html", context)
+
+def salasana_vaihto(request):
+    if request.method == "POST":
+        form=PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, "Salasanan vaihto onnistui")
+            return redirect("index")
+        else:
+            messages.error(request, "kokeile uudelleen")
+    else:
+        form=PasswordChangeForm(request.POST)
+
+    context={
+        "form":form
+    }
+
+    return render(request, "vaihda_salasana.html", context)
