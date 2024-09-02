@@ -5,18 +5,65 @@ tsuhde=(
     ("vakituinen", "Vakituinen"),
     ("määräaikainen", "Määräaikainen"),
 )
+mkunta= [
+        ('ahvenanmaa', 'Ahvenanmaa'),
+        ('etela_karjala', 'Etelä-Karjala'),
+        ('etela_pohjanmaa', 'Etelä-Pohjanmaa'),
+        ('etela_savo', 'Etelä-Savo'),
+        ('kainuu', 'Kainuu'),
+        ('kanta_hame', 'Kanta-Häme'),
+        ('keski_pohjanmaa', 'Keski-Pohjanmaa'),
+        ('keski_suomi', 'Keski-Suomi'),
+        ('kymenlaakso', 'Kymenlaakso'),
+        ('lappi', 'Lappi'),
+        ('pirkanmaa', 'Pirkanmaa'),
+        ('pohjanmaa', 'Pohjanmaa'),
+        ('pohjois_karjala', 'Pohjois-Karjala'),
+        ('pohjois_pohjanmaa', 'Pohjois-Pohjanmaa'),
+        ('pohjois_savo', 'Pohjois-Savo'),
+        ('paijat_hame', 'Päijät-Häme'),
+        ('satakunta', 'Satakunta'),
+        ('uusimaa', 'Uusimaa'),
+        ('varsinais_suomi', 'Varsinais-Suomi'),
+    ]
+
+class Kunta(models.Model):
+    maakunta=models.CharField(choices=mkunta, max_length=20, default='uusimaa')
+    nimi=models.CharField(max_length=50)
+    
+
+    def __str__(self):
+        return self.maakunta + ": " + self.nimi
+
+    class Meta:
+        verbose_name_plural= "kunnat"
+
+class Työpiste(models.Model):
+    nimi=models.CharField(max_length=50)
+    katuosoite = models.CharField(max_length=100)
+    postinumero = models.CharField(max_length=10)
+    postitoimipaikka = models.CharField(max_length=50)
+    kunta=models.ForeignKey(Kunta, on_delete=models.RESTRICT)
+
+    def __str__(self):
+        return self.kunta + ": " + self.nimi
+
+    class Meta:
+        verbose_name_plural= "työpisteet"
+
 
 class Työntekijä(models.Model):
     etunimi = models.CharField(max_length=50)
     sukunimi = models.CharField(max_length=50)
     puhelin = models.CharField(max_length=50)
+    email = models.EmailField()
     katuosoite = models.CharField(max_length=100)
     postinumero = models.CharField(max_length=10)
     postitoimipaikka = models.CharField(max_length=50)
-    email = models.EmailField()
     aloitus_pvm = models.DateField()
     lopetus_pvm = models.DateField(blank=True,null=True)
     työsuhteen_tyyppi= models.CharField(choices=tsuhde, max_length=50, default="vakituinen")
+    työpiste= models.ForeignKey(Työpiste, on_delete=models.SET_NULL, null=True, blank= True)
 
     def __str__(self):
         return self.sukunimi + ", " + self.etunimi

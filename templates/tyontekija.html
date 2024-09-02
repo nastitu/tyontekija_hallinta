@@ -4,7 +4,9 @@
 <form  method = "POST">
     {% csrf_token %}
     {{form.as_p }}
-    
+    <br>
+    {{kuntaform.as_p}}
+    <br>
     <button class="btn btn-primary" type="submit">Tallenna</button>
     <a class="btn btn-primary" href="{% url "index" %}" role="button">Takaisin</a>
     {% if t != None %}
