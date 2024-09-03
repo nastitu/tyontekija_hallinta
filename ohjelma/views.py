@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Työntekijä
-from .forms import TyöntekijäForm, KuntaForm
+from .forms import TyöntekijäForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -19,17 +19,17 @@ def index(request):
 def lisää_työntekijä(request):
     if request.method == "POST":
         form=TyöntekijäForm(request.POST)
-        kuntaform=KuntaForm(request.POST)
+
         if form.is_valid():
             form.save()
             messages.success(request, "Työntekijä tallennettu!")
             return redirect("index")
     form=TyöntekijäForm()
-    kuntaform=KuntaForm()
+
     context={
         't':None,
         'form':form,
-        'kuntaform': kuntaform
+
     }
     return render(request, "tyontekija.html", context)
 

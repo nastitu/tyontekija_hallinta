@@ -1,10 +1,10 @@
 from django.forms import ModelForm, DateInput
-from .models import Työntekijä, Kunta, Työpiste
+from .models import Työntekijä
 
 class TyöntekijäForm(ModelForm):
     class Meta:
         model = Työntekijä
-        exclude = ('työpiste',)
+        fields ="__all__"
         widgets ={
             'aloitus_pvm': DateInput(attrs={"type": "date"}),
             'lopetus_pvm': DateInput(attrs={"type": "date"}),
@@ -17,7 +17,7 @@ class TyöntekijäForm(ModelForm):
 # class KuntaForm(forms.Form):
 #     kunta = forms.ModelChoiceField(queryset=Kunta.objects.none(), empty_label="Valitse kunta")
 
-class KuntaForm(ModelForm):
-    class Meta:
-        model = Kunta
-        fields ="__all__"
+# class KuntaForm(ModelForm):
+#     class Meta:
+#         model = Kunta
+#         fields ="__all__"

@@ -25,10 +25,18 @@ mkunta= [
         ('satakunta', 'Satakunta'),
         ('uusimaa', 'Uusimaa'),
         ('varsinais_suomi', 'Varsinais-Suomi'),
-    ]
+ ]
+class Maakunta(models.Model):
+    nimi=models.CharField(choices=mkunta, max_length=20)#  default='uusimaa')
+
+    def __str__(self):
+        return self.nimi
+
+    class Meta:
+        verbose_name_plural= "maakunnat"
 
 class Kunta(models.Model):
-    maakunta=models.CharField(choices=mkunta, max_length=20, default='uusimaa')
+    maakunta=models.ForeignKey(Maakunta, on_delete=models.SET_NULL, null=True, blank= True)
     nimi=models.CharField(max_length=50)
     
 
@@ -43,7 +51,7 @@ class Työpiste(models.Model):
     katuosoite = models.CharField(max_length=100)
     postinumero = models.CharField(max_length=10)
     postitoimipaikka = models.CharField(max_length=50)
-    kunta=models.ForeignKey(Kunta, on_delete=models.RESTRICT)
+    kunta=models.ForeignKey(Kunta, on_delete=models.SET_NULL, null=True, blank= True)
 
     def __str__(self):
         return self.kunta + ": " + self.nimi
@@ -63,6 +71,8 @@ class Työntekijä(models.Model):
     aloitus_pvm = models.DateField()
     lopetus_pvm = models.DateField(blank=True,null=True)
     työsuhteen_tyyppi= models.CharField(choices=tsuhde, max_length=50, default="vakituinen")
+    työmaakunta=models.ForeignKey(Maakunta, on_delete=models.SET_NULL, null=True, blank= True)
+    työkunta= models.ForeignKey(Kunta, on_delete=models.SET_NULL, null=True, blank= True)
     työpiste= models.ForeignKey(Työpiste, on_delete=models.SET_NULL, null=True, blank= True)
 
     def __str__(self):
