@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Työntekijä
+from .models import Työntekijä, Kunta, Maakunta, Työpiste
 from .forms import TyöntekijäForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -59,4 +59,21 @@ def muokkaa_työntekijää(request, pk):
         'form':form
     }
     return render(request, "tyontekija.html", context)
+
+def lataa_kunnat(request):
+    maakunta_id=request.GET.get('maakunta')
+    kunnat=Kunta.objects.filter(maakunta_id=maakunta_id).order_by('nimi')
+    context={
+        'kunnat':kunnat
+    }
+    return render(request, 'kunta_lista.html', context)
+
+
+def lataa_työpisteet(request):
+    kunta_id=request.GET.get('maakunta')
+    työpisteet=Työpiste.objects.filter(kunta_id=kunta_id).order_by('nimi')
+    context={
+        'työpisteet':työpisteet
+    }
+    return render(request, 'tyopiste_lista.html', context)
 

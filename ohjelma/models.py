@@ -5,7 +5,7 @@ tsuhde=(
     ("vakituinen", "Vakituinen"),
     ("määräaikainen", "Määräaikainen"),
 )
-mkunta= [
+mkunta= (
         ('ahvenanmaa', 'Ahvenanmaa'),
         ('etela_karjala', 'Etelä-Karjala'),
         ('etela_pohjanmaa', 'Etelä-Pohjanmaa'),
@@ -25,7 +25,7 @@ mkunta= [
         ('satakunta', 'Satakunta'),
         ('uusimaa', 'Uusimaa'),
         ('varsinais_suomi', 'Varsinais-Suomi'),
- ]
+)
 class Maakunta(models.Model):
     nimi=models.CharField(choices=mkunta, max_length=20)#  default='uusimaa')
 
@@ -41,7 +41,7 @@ class Kunta(models.Model):
     
 
     def __str__(self):
-        return self.maakunta + ": " + self.nimi
+        return self.maakunta.nimi + ": " + self.nimi
 
     class Meta:
         verbose_name_plural= "kunnat"
@@ -54,7 +54,7 @@ class Työpiste(models.Model):
     kunta=models.ForeignKey(Kunta, on_delete=models.SET_NULL, null=True, blank= True)
 
     def __str__(self):
-        return self.kunta + ": " + self.nimi
+        return self.kunta.nimi + ": " + self.nimi
 
     class Meta:
         verbose_name_plural= "työpisteet"
