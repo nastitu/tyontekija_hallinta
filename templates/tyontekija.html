@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form  method = "POST">
+<form  method = "POST" id="tyontekijaForm" data-kunnat-url="{% url 'lataa_kunnat' %}" data-tyopisteet-url="{% url 'lataa_tyopisteet' %}">
     {% csrf_token %}
     {{form.as_p }}
 
@@ -12,7 +12,7 @@
     {% endif %}
 </form>
 
-
+<p>Testi</p>
 
 <button onclick="tp_k_mk()">Click me (static folder)!</button>
 

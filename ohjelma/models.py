@@ -6,25 +6,25 @@ tsuhde=(
     ("määräaikainen", "Määräaikainen"),
 )
 mkunta= (
-        ('ahvenanmaa', 'Ahvenanmaa'),
-        ('etela_karjala', 'Etelä-Karjala'),
-        ('etela_pohjanmaa', 'Etelä-Pohjanmaa'),
-        ('etela_savo', 'Etelä-Savo'),
-        ('kainuu', 'Kainuu'),
-        ('kanta_hame', 'Kanta-Häme'),
-        ('keski_pohjanmaa', 'Keski-Pohjanmaa'),
-        ('keski_suomi', 'Keski-Suomi'),
-        ('kymenlaakso', 'Kymenlaakso'),
-        ('lappi', 'Lappi'),
-        ('pirkanmaa', 'Pirkanmaa'),
-        ('pohjanmaa', 'Pohjanmaa'),
-        ('pohjois_karjala', 'Pohjois-Karjala'),
-        ('pohjois_pohjanmaa', 'Pohjois-Pohjanmaa'),
-        ('pohjois_savo', 'Pohjois-Savo'),
-        ('paijat_hame', 'Päijät-Häme'),
-        ('satakunta', 'Satakunta'),
-        ('uusimaa', 'Uusimaa'),
-        ('varsinais_suomi', 'Varsinais-Suomi'),
+        ("Ahvenanmaa", "Ahvenanmaa"),
+        ("Etelä-Karjala", "Etelä-Karjala"),
+        ("Etelä-Pohjanmaa", "Etelä-Pohjanmaa"),
+        ("Etelä-Savo", "Etelä-Savo"),
+        ("Kainuu", "Kainuu"),
+        ("Kanta-Häme", "Kanta-Häme"),
+        ("Keski-Pohjanmaa", "Keski-Pohjanmaa"),
+        ("Keski-Suomi", "Keski-Suomi"),
+        ("Kymenlaakso", "Kymenlaakso"),
+        ("Lappi", "Lappi"),
+        ("Pirkanmaa", "Pirkanmaa"),
+        ("Pohjanmaa", "Pohjanmaa"),
+        ("Pohjois-Karjala", "Pohjois-Karjala"),
+        ("Pohjois-Pohjanmaa", "Pohjois-Pohjanmaa"),
+        ("Pohjois-Savo", "Pohjois-Savo"),
+        ("Päijät-Häme", "Päijät-Häme"),
+        ("Satakunta", "Satakunta"),
+        ("Uusimaa", "Uusimaa"),
+        ("Varsinais-Suomi", "Varsinais-Suomi"),
 )
 class Maakunta(models.Model):
     nimi=models.CharField(choices=mkunta, max_length=20)#  default='uusimaa')
@@ -41,7 +41,7 @@ class Kunta(models.Model):
     
 
     def __str__(self):
-        return self.maakunta.nimi + ": " + self.nimi
+        return self.nimi
 
     class Meta:
         verbose_name_plural= "kunnat"
@@ -54,7 +54,7 @@ class Työpiste(models.Model):
     kunta=models.ForeignKey(Kunta, on_delete=models.SET_NULL, null=True, blank= True)
 
     def __str__(self):
-        return self.kunta.nimi + ": " + self.nimi
+        return self.nimi
 
     class Meta:
         verbose_name_plural= "työpisteet"

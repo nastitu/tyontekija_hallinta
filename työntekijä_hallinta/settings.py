@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Helsinki' ###
+TIME_ZONE = 'Europe/Helsinki' ### Ajantasalle
 
 USE_I18N = True
 
@@ -144,4 +144,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "käyttäjät:sisaan"
+LOGIN_URL = "käyttäjät:sisaan" # muutettu kirjautumissivu

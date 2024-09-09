@@ -61,7 +61,7 @@ def muokkaa_työntekijää(request, pk):
     return render(request, "tyontekija.html", context)
 
 def lataa_kunnat(request):
-    maakunta_id=request.GET.get('maakunta')
+    maakunta_id=request.GET.get('työmaakunta')
     kunnat=Kunta.objects.filter(maakunta_id=maakunta_id).order_by('nimi')
     context={
         'kunnat':kunnat
@@ -70,10 +70,10 @@ def lataa_kunnat(request):
 
 
 def lataa_työpisteet(request):
-    kunta_id=request.GET.get('maakunta')
+    kunta_id=request.GET.get('työkunta')
     työpisteet=Työpiste.objects.filter(kunta_id=kunta_id).order_by('nimi')
     context={
-        'työpisteet':työpisteet
+        'tyopisteet':työpisteet
     }
     return render(request, 'tyopiste_lista.html', context)
 
