@@ -4,6 +4,11 @@ $(document).ready(function(){
     // $("p").click(function(){
     //   $(this).hide();
     // });
+    $('#tyontekijatTable').DataTable({
+      language:{
+        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennus
+      }
+    });
     $("#id_työmaakunta").change(function () { //lataa kuntien tiedot
         var url = $("#tyontekijaForm").attr("data-kunnat-url");  // kuntien lataus url html:stä
         var maakuntaId = $(this).val();  // lataa valittu maakunta html:stä

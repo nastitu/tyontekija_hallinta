@@ -6,31 +6,54 @@
 <br>
 
 
-<table class="table table-striped table-hover">
+{% if user.is_authenticated %}
+
+{% comment %} <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div> {% endcomment %}
+
+<table id="tyontekijatTable" class="display table table-striped table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        {% comment %} <th scope="col">#</th> {% endcomment %}
         <th scope="col">Sukunimi</th>
         <th scope="col">Etunimi</th>
+        <th scope="col">Työtehtävä</th>
+        <th scope="col">Työkunta</th>
+        <th scope="col">Työpiste</th>
         <th scope="col"></th>
       </tr>
     </thead>
 
-    {% for t in tyontekijat %}
+    
     <tbody>
+      {% for t in tyontekijat %}
       <tr>
-        <th scope="row">{{forloop.counter}}</th>
+        {% comment %} <th scope="row">{{forloop.counter}}</th> {% endcomment %}
         <td>{{t.sukunimi}}</td>
         <td>{{t.etunimi}}</td>
+        <td>{{t.työtehtävä}}</td>
+        {% comment %} <td>{{t.työkunta}}</td> {% endcomment %}
+        <td>{% if t.työkunta == None %}-{% else %}{{t.työkunta}}{% endif %}</td>
+        {% comment %} <td>{{t.työpiste}}</td> {% endcomment %}
+        <td>{% if t.työpiste == None %}-{% else %}{{t.työpiste}}{% endif %}</td>
         <td><a class="btn btn-primary" href="{% url "muokkaa_t" t.id %}" role="button">Lisätietoja</a></td>
         
       </tr>
       
-      
+      {% endfor %}
     </tbody>
-    {% endfor %}
+    
   </table>
 
-
-
+{% else %}
+<a class="btn btn-primary" href="{% url 'käyttäjät:sisaan'%}">Kirjaudu sisään</a>
+{% endif %}
 {% endblock content %}    

@@ -71,6 +71,7 @@ class Työntekijä(models.Model):
     aloitus_pvm = models.DateField()
     lopetus_pvm = models.DateField(blank=True,null=True)
     työsuhteen_tyyppi= models.CharField(choices=tsuhde, max_length=50, default="vakituinen")
+    työtehtävä = models.CharField(max_length=100)
     työmaakunta=models.ForeignKey(Maakunta, on_delete=models.SET_NULL, null=True, blank= True)
     työkunta= models.ForeignKey(Kunta, on_delete=models.SET_NULL, null=True, blank= True)
     työpiste= models.ForeignKey(Työpiste, on_delete=models.SET_NULL, null=True, blank= True)
