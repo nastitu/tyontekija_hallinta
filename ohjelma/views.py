@@ -24,7 +24,10 @@ def lisää_työntekijä(request):
             form.save()
             messages.success(request, "Työntekijä tallennettu!")
             return redirect("index")
-    form=TyöntekijäForm()
+        else:
+            messages.error(request, "Työntekijän tallennus epäonnistui! Kokeile uudelleen")
+    else:
+        form=TyöntekijäForm()
 
     context={
         't':None,
@@ -33,12 +36,6 @@ def lisää_työntekijä(request):
     }
     return render(request, "tyontekija.html", context)
 
-@login_required
-def poista_työntekijä(request, pk):
-    työntekijä=Työntekijä.objects.get(pk=pk)
-    työntekijä.delete()
-    messages.success(request, "Työntekijä poistettu!")
-    return redirect("index")
             
 @login_required
 def muokkaa_työntekijää(request, pk):
@@ -50,15 +47,23 @@ def muokkaa_työntekijää(request, pk):
             form.save()
             messages.success(request, "Työntekijä päivitetty!")
             return redirect("index")
-            
-    
-    form=TyöntekijäForm(instance=työntekijä)
+        else:
+            messages.error(request, "Työntekijän tallennus epäonnistui! Kokeile uudelleen")    
+    else:
+        form=TyöntekijäForm(instance=työntekijä)
 
     context={
         't':työntekijä,
         'form':form
     }
     return render(request, "tyontekija.html", context)
+
+@login_required
+def poista_työntekijä(request, pk):
+    työntekijä=Työntekijä.objects.get(pk=pk)
+    työntekijä.delete()
+    messages.success(request, "Työntekijä poistettu!")
+    return redirect("index")
 
 def lataa_kunnat(request):
     maakunta_id=request.GET.get('työmaakunta')

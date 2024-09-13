@@ -4,6 +4,7 @@ from django.db.models.base import Model
 from django.forms import ModelForm, DateInput
 from django.forms.utils import ErrorList
 from .models import Työntekijä,Kunta,Työpiste,Maakunta
+from django.core.exceptions import ValidationError
 
 class TyöntekijäForm(ModelForm):
     class Meta:
@@ -40,7 +41,20 @@ class TyöntekijäForm(ModelForm):
                 self.fields['työpiste'].queryset = self.instance.työkunta.työpiste_set.order_by('nimi')
             except (AttributeError):   #tämä koska ei tykkää null arvoista työkunnassa  ja työpisteessä
                 pass 
+    
+    def clean(self): #Tarkastetaan että lopetus on aloituksen jälkeen
+        puhdistettu_data =super().clean()
+        aloitus=puhdistettu_data.get("aloitus_pvm")
+        lopetus=puhdistettu_data.get("lopetus_pvm")
 
+        if lopetus is not None:
+            if lopetus < aloitus:
+                raise ValidationError("Lopetuksen täytyy olla aloituksen jälkeen")
+
+
+
+
+    
 # class MaakuntaForm(forms.Form):
 #     maakunta = forms.ModelChoiceField(queryset=Maakunta.objects.all(), empty_label="Valitse maakunta")
 

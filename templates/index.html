@@ -4,6 +4,7 @@
 
 <h1>Työntekijähallinta</h1>
 <br>
+<br>
 
 
 {% if user.is_authenticated %}
@@ -52,6 +53,9 @@
     </tbody>
     
   </table>
+
+<br>
+<br>
 
 {% else %}
 <a class="btn btn-primary" href="{% url 'käyttäjät:sisaan'%}">Kirjaudu sisään</a>

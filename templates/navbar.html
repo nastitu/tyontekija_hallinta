@@ -1,30 +1,60 @@
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url "index" %}">Työntekijähallinta</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="{% url "index" %}">Pääsivu</a>
-
-          
-
-          {% if user.is_authenticated %}
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url "index" %}">Työntekijähallinta</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% comment %} <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li> {% endcomment %}
+        {% if user.is_authenticated %}
+        
+        <li class="nav-item">
           <a class="nav-link" href="{% url "lisaa_t" %}">Lisää työntekijä</a>
-          <a class="nav-link" href="{% url "käyttäjät:salasana_vaihto" %}">Vaihda salasana</a>
-          
-          <a class="nav-link" href="{% url "käyttäjät:ulos" %}">Kirjaudu ulos</a>
-          {% else %}
-          <a class="nav-link" href="{% url "käyttäjät:sisaan" %}">Kirjaudu sisään</a>
-          <a class="nav-link" href="{% url "käyttäjät:luo_tili" %}">Luo tili</a>
-          {% endif %}
-         
-          
-          
-          {% comment %} <a class="nav-link" href="#">Muokkaa työntekijää</a> {% endcomment %}
-          {% comment %} <a class="nav-link disabled" aria-disabled="true">Disabled</a> {% endcomment %}
-        </div>
-      </div>
+        </li>
+        {% comment %} <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> {% endcomment %}
+        {% else %}
+        {% comment %} <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li> {% endcomment %}
+        
+      
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav ms-auto">
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Käyttäjätili
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            {% if user.is_authenticated %}
+
+            <li><a class="dropdown-item" href="{% url "käyttäjät:salasana_vaihto" %}">Vaihda salasana</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url "käyttäjät:ulos" %}">Kirjaudu ulos</a></li>
+            {% else %}
+            
+            <li><a class="dropdown-item" href="{% url "käyttäjät:luo_tili" %}">Luo tili</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url "käyttäjät:sisaan" %}">Kirjaudu sisään</a></li>
+            
+            {% endif %}
+          </ul>
+        </li>
+
+      </ul>
+
     </div>
-  </nav>
+  </div>
+</nav>
