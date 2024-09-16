@@ -4,11 +4,32 @@ $(document).ready(function(){
     // $("p").click(function(){
     //   $(this).hide();
     // });
+    var url2 = $("#tTable").attr("data-t-url");
     $('#tyontekijatTable').DataTable({
       language:{
         url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennus
       }
     });
+    $('#tTable').DataTable({
+      
+      language:{
+        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennus
+      },
+      ajax: {
+        url: url2,
+        dataSrc: "",
+        columns:[
+          {data: "Sukunimi"},
+          {data: "Etunimi"},
+          {data: "Työtehtävä"},
+          {data: "Työkunta"},
+          {data: "Työpiste"},
+          {data: "X"},
+        ],
+
+      }
+    });
+
     $("#id_työmaakunta").change(function () { //lataa kuntien tiedot
         var url = $("#tyontekijaForm").attr("data-kunnat-url");  // kuntien lataus url html:stä
         var maakuntaId = $(this).val();  // lataa valittu maakunta html:stä

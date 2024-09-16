@@ -4,6 +4,8 @@ from .forms import TyöntekijäForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -82,3 +84,7 @@ def lataa_työpisteet(request):
     }
     return render(request, 'tyopiste_lista.html', context)
 
+def hae_tyontekijat(request):
+    tyontekijat=Työntekijä.objects.all().values()
+    t_lista=list(tyontekijat)
+    return JsonResponse(t_lista, safe=False)
