@@ -63,10 +63,10 @@
         {% comment %} <th scope="col">#</th> {% endcomment %}
         <th scope="col">Sukunimi</th>
         <th scope="col">Etunimi</th>
-        <th scope="col">Työtehtävä</th>
+        {% comment %} <th scope="col">Työtehtävä</th>
         <th scope="col">Työkunta</th>
-        <th scope="col">Työpiste</th>
-        <th scope="col"></th>
+        <th scope="col">Työpiste</th> {% endcomment %}
+        {% comment %} <th scope="col"></th> {% endcomment %}
       </tr>
     </thead>
 
@@ -76,7 +76,38 @@
 
 <br>
 <br>
+ <script>
+  {% comment %} $.ajax({
+      url: "{% url 'hae_t' %}",
+      method: 'GET',
+      success: function (data) {
+          console.log('our data',data);
+      }
+  }); {% endcomment %}
+  {% comment %} $(document).ready(function(){
+  var url2 = $("#tTable").attr("data-t-url");
+  $('#tTable').DataTable({
+      
+    language:{
+      url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
+    },
+    ajax: {
+      url: url2,
+      method: "GET",
+      dataSrc: "",
+      columns:[
+        {data: "sukunimi"},
+        {data: "etunimi"},
+        {data: "työtehtävä"},
+        {data: "työkunta", defaultContent: '<i>Not set</i>'},
+        {data: "työpiste", defaultContent: '<i>Not set</i>'},
+        
+      ],
 
+    }
+  });
+}); {% endcomment %}
+</script>
 {% else %}
 <a class="btn btn-primary" href="{% url 'käyttäjät:sisaan'%}">Kirjaudu sisään</a>
 {% endif %}

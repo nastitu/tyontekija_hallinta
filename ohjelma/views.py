@@ -85,6 +85,11 @@ def lataa_työpisteet(request):
     return render(request, 'tyopiste_lista.html', context)
 
 def hae_tyontekijat(request):
-    tyontekijat=Työntekijä.objects.all().values()
-    t_lista=list(tyontekijat)
-    return JsonResponse(t_lista, safe=False)
+    tyontekijat=Työntekijä.objects.all().values('sukunimi',
+                                                'etunimi')
+                                                # 'työtehtävä',
+                                                # 'työkunta',
+                                                # 'työpiste')
+    data=list(tyontekijat)
+    # print(data)
+    return JsonResponse(data, safe=False)

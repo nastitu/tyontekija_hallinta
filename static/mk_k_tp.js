@@ -5,26 +5,34 @@ $(document).ready(function(){
     //   $(this).hide();
     // });
     var url2 = $("#tTable").attr("data-t-url");
+    $.ajax({
+      url: url2,
+      method: 'GET',
+      success: function (data) {
+          console.log('our data',data);
+      }
+  });
     $('#tyontekijatTable').DataTable({
       language:{
-        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennus
+        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
       }
     });
     $('#tTable').DataTable({
       
       language:{
-        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennus
+        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
       },
       ajax: {
         url: url2,
-        dataSrc: "",
+        method: "GET",
+        dataSrc: '',
         columns:[
-          {data: "Sukunimi"},
-          {data: "Etunimi"},
-          {data: "Työtehtävä"},
-          {data: "Työkunta"},
-          {data: "Työpiste"},
-          {data: "X"},
+          {data: "sukunimi"},
+          {data: "etunimi"},
+          // {data: "työtehtävä"},
+          // {data: "työkunta"},
+          // {data: "työpiste"},
+          
         ],
 
       }
