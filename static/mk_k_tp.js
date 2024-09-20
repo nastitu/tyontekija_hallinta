@@ -9,33 +9,77 @@ $(document).ready(function(){
       url: url2,
       method: 'GET',
       success: function (data) {
-          console.log('our data',data);
-      }
-  });
-    $('#tyontekijatTable').DataTable({
-      language:{
-        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
+          console.log(data);
       }
     });
-    $('#tTable').DataTable({
-      
-      language:{
-        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
+
+    // $('#tyontekijatTable').DataTable({
+    //   language:{
+    //     url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
+    //   }
+    // });
+    var table= $('#tTable').DataTable({
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json',
       },
       ajax: {
-        url: url2,
+        url: url2, 
         method: "GET",
-        dataSrc: '',
-        columns:[
-          {data: "sukunimi"},
-          {data: "etunimi"},
-          // {data: "työtehtävä"},
-          // {data: "työkunta"},
-          // {data: "työpiste"},
+        dataSrc: '',  // Koska JSON ei ole sisäkkäinen
+      },
+      columns: [
+        {data: 'sukunimi'},
+        {data: 'etunimi'},
+        {data: 'aloitus_pvm'},
+        {data: 'lopetus_pvm'},
+        {data: 'työsuhteen_tyyppi'},
+        {data: 'työtehtävä'},
+        {data: 'työkunta__nimi'},
+        {data: 'työpiste__nimi'},
+        {
+          data: null,  // Data ei tule JSON:sta
+          render: function(data, type, row) {
+            // Oletetaan, että row.id on työntekijän ID JSON:sta
+            var url = "/tyontekija/" + row.id;   // Käytetään rivin id:tä
+            return '<a href="' + url + '" class="btn btn-primary">Muokkaa</a>';
+          },
+          orderable: false,  // Tämä sarake ei ole järjesteltävissä
+        }
+      ]
+    });
+    $('#kuntaValikko').on('change', function(){
+      table.column(7).search(this.value).draw();   
+   });
+    // $('#tTable').DataTable({
+    //   language:{
+    //     url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
+    //   },
+    //   ajax: {
+    //     url: url2,
+    //     method: "GET",
+    //     dataSrc: '',
+    //     columns:[
+    //       {data: 'sukunimi'},
+    //       {data: 'etunimi'},
+    //       {data: "työtehtävä"},
+    //       {data: "työkunta"},
+    //       {data: "työpiste"},
           
-        ],
+    //     ],
 
-      }
+    //   }
+    // });
+    $("#kuntaValikko").click(function () { //lataa kuntien tiedot
+      var url = $("#kuntaValikko").attr("data-kaikkikunnat-url");  // kuntien lataus url html:stä
+      var maakuntaId = $(this).val();  // lataa valittu maakunta html:stä
+
+      $.ajax({                       // alusta AJAX request
+        url: url,                    // aseta url
+        success: function (data) {   // `data` on mitä `lataa_kunnat` view funktio antaa
+          $("#kuntaValikko").html(data);  // korvaa työkunta valikon arvot serverin antamilla
+        }
+      });
+
     });
 
     $("#id_työmaakunta").change(function () { //lataa kuntien tiedot

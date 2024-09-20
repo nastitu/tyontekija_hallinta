@@ -9,7 +9,13 @@
 
 {% if user.is_authenticated %}
 
-{% comment %} <div class="dropdown">
+<select class="form-select" id="kuntaValikko" data-kaikkikunnat-url="{% url 'lataa_kaikki_kunnat' %}" aria-label="Default select example">
+  <option selected>Valitse kunta</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
+ {% comment %} <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Dropdown button
   </button>
@@ -18,12 +24,12 @@
     <li><a class="dropdown-item" href="#">Another action</a></li>
     <li><a class="dropdown-item" href="#">Something else here</a></li>
   </ul>
-</div> {% endcomment %}
+</div>  {% endcomment %}
 
-<table id="tyontekijatTable" class="display table table-striped table-hover">
+ {% comment %} <table id="tyontekijatTable" class="display table table-striped table-hover">
     <thead>
       <tr>
-        {% comment %} <th scope="col">#</th> {% endcomment %}
+        
         <th scope="col">Sukunimi</th>
         <th scope="col">Etunimi</th>
         <th scope="col">Työtehtävä</th>
@@ -37,13 +43,13 @@
     <tbody>
       {% for t in tyontekijat %}
       <tr>
-        {% comment %} <th scope="row">{{forloop.counter}}</th> {% endcomment %}
+       
         <td>{{t.sukunimi}}</td>
         <td>{{t.etunimi}}</td>
         <td>{{t.työtehtävä}}</td>
-        {% comment %} <td>{{t.työkunta}}</td> {% endcomment %}
+        
         <td>{% if t.työkunta == None %}-{% else %}{{t.työkunta}}{% endif %}</td>
-        {% comment %} <td>{{t.työpiste}}</td> {% endcomment %}
+        
         <td>{% if t.työpiste == None %}-{% else %}{{t.työpiste}}{% endif %}</td>
         <td><a class="btn btn-primary" href="{% url "muokkaa_t" t.id %}" role="button">Lisätietoja</a></td>
         
@@ -52,7 +58,7 @@
       {% endfor %}
     </tbody>
     
-  </table>
+  </table>  {% endcomment %}
  <br>
  <br>
  <br>
@@ -63,9 +69,13 @@
         {% comment %} <th scope="col">#</th> {% endcomment %}
         <th scope="col">Sukunimi</th>
         <th scope="col">Etunimi</th>
-        {% comment %} <th scope="col">Työtehtävä</th>
+        <th scope="col">Aloitus pvm</th>
+        <th scope="col">Lopetus pvm</th>
+        <th scope="col">Työsuhde</th>
+        <th scope="col">Työtehtävä</th>
         <th scope="col">Työkunta</th>
-        <th scope="col">Työpiste</th> {% endcomment %}
+        <th scope="col">Työpiste</th> 
+        <th scope="col">Toiminnot</th> 
         {% comment %} <th scope="col"></th> {% endcomment %}
       </tr>
     </thead>
@@ -76,38 +86,7 @@
 
 <br>
 <br>
- <script>
-  {% comment %} $.ajax({
-      url: "{% url 'hae_t' %}",
-      method: 'GET',
-      success: function (data) {
-          console.log('our data',data);
-      }
-  }); {% endcomment %}
-  {% comment %} $(document).ready(function(){
-  var url2 = $("#tTable").attr("data-t-url");
-  $('#tTable').DataTable({
-      
-    language:{
-      url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
-    },
-    ajax: {
-      url: url2,
-      method: "GET",
-      dataSrc: "",
-      columns:[
-        {data: "sukunimi"},
-        {data: "etunimi"},
-        {data: "työtehtävä"},
-        {data: "työkunta", defaultContent: '<i>Not set</i>'},
-        {data: "työpiste", defaultContent: '<i>Not set</i>'},
-        
-      ],
-
-    }
-  });
-}); {% endcomment %}
-</script>
+ 
 {% else %}
 <a class="btn btn-primary" href="{% url 'käyttäjät:sisaan'%}">Kirjaudu sisään</a>
 {% endif %}
