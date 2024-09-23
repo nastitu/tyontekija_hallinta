@@ -5,13 +5,13 @@ $(document).ready(function(){
     //   $(this).hide();
     // });
     var url2 = $("#tTable").attr("data-t-url");
-    $.ajax({
-      url: url2,
-      method: 'GET',
-      success: function (data) {
-          console.log(data);
-      }
-    });
+    // $.ajax({
+    //   url: url2,
+    //   method: 'GET',
+    //   success: function (data) {
+    //       console.log(data);
+    //   }
+    // });
 
     // $('#tyontekijatTable').DataTable({
     //   language:{
@@ -48,30 +48,11 @@ $(document).ready(function(){
       ]
     });
     $('#kuntaValikko').on('change', function(){
-      table.column(7).search(this.value).draw();   
-   });
-    // $('#tTable').DataTable({
-    //   language:{
-    //     url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
-    //   },
-    //   ajax: {
-    //     url: url2,
-    //     method: "GET",
-    //     dataSrc: '',
-    //     columns:[
-    //       {data: 'sukunimi'},
-    //       {data: 'etunimi'},
-    //       {data: "työtehtävä"},
-    //       {data: "työkunta"},
-    //       {data: "työpiste"},
-          
-    //     ],
+      table.column(6).search(this.value).draw();   
+    });
 
-    //   }
-    // });
     $("#kuntaValikko").click(function () { //lataa kuntien tiedot
       var url = $("#kuntaValikko").attr("data-kaikkikunnat-url");  // kuntien lataus url html:stä
-      var maakuntaId = $(this).val();  // lataa valittu maakunta html:stä
 
       $.ajax({                       // alusta AJAX request
         url: url,                    // aseta url
@@ -79,6 +60,19 @@ $(document).ready(function(){
           $("#kuntaValikko").html(data);  // korvaa työkunta valikon arvot serverin antamilla
         }
       });
+
+    });
+    $('.tyosuhdeInput').on('change', function(){
+      table.column(4).search(this.value).draw();   
+    });
+
+    $('.aikaInput').on('change', function(){
+      var milloin= this.value;
+
+      var nykyhetki= new Date()
+      console.log(milloin)
+      console.log(nykyhetki)
+
 
     });
 
