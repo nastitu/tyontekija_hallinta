@@ -51,28 +51,53 @@ $(document).ready(function(){
       table.column(6).search(this.value).draw();   
     });
 
-    $("#kuntaValikko").click(function () { //lataa kuntien tiedot
-      var url = $("#kuntaValikko").attr("data-kaikkikunnat-url");  // kuntien lataus url html:stä
+    // $("#kuntaValikko").click(function () { //lataa kuntien tiedot
+    //   var url = $("#kuntaValikko").attr("data-kaikkikunnat-url");  // kuntien lataus url html:stä
 
-      $.ajax({                       // alusta AJAX request
-        url: url,                    // aseta url
-        success: function (data) {   // `data` on mitä `lataa_kunnat` view funktio antaa
-          $("#kuntaValikko").html(data);  // korvaa työkunta valikon arvot serverin antamilla
-        }
-      });
+    //   $.ajax({                       // alusta AJAX request
+    //     url: url,                    // aseta url
+    //     success: function (data) {   // `data` on mitä `lataa_kunnat` view funktio antaa
+    //       $("#kuntaValikko").html(data);  // korvaa työkunta valikon arvot serverin antamilla
+    //     }
+    //   });
 
-    });
+    // });
     $('.tyosuhdeInput').on('change', function(){
       table.column(4).search(this.value).draw();   
     });
 
     $('.aikaInput').on('change', function(){
-      var milloin= this.value;
-
-      var nykyhetki= new Date()
-      console.log(milloin)
-      console.log(nykyhetki)
-
+      var entinen = $('#entinen').prop('checked');
+      var nykyinen=$('#nykyinen').prop('checked');
+      var tuleva =$('#tuleva').prop('checked');
+      // var milloin= this.value;
+      // var valittu = $(this).prop('checked');
+      var tanaan= new Date();
+      console.log(entinen);
+      console.log(nykyinen);
+      console.log(tuleva);
+      table.column(2).search("").column(3).search(""); //nollaus
+      // console.log(milloin)
+      // console.log(valittu)
+      console.log(tanaan);
+      if(entinen){
+        table
+      .column(3)
+      .search((d) => new Date(d) < tanaan);
+      }
+      if(nykyinen){
+        table
+        .column(2)
+        .search((d) => new Date(d) < tanaan)
+        .column(3)
+        .search((d) => new Date(d) > tanaan || d=="");
+      }
+      if(tuleva){
+        table
+      .column(2)
+      .search((d) => new Date(d) > tanaan);
+      }
+      table.draw();
 
     });
 

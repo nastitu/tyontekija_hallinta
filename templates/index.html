@@ -9,8 +9,12 @@
 
 {% if user.is_authenticated %}
 
-<select class="form-select" id="kuntaValikko" data-kaikkikunnat-url="{% url 'lataa_kaikki_kunnat' %}" aria-label="Default select example">
-  <option>Valitse kunnat</option>  
+<select class="form-select" id="kuntaValikko" aria-label="Default select example">
+  <option value="">Kaikki kunnat</option>
+  {% for k in kunnat %}
+  <option>{{ k.nimi }}</option>
+  {% endfor %}
+
 </select>
 
 <br>

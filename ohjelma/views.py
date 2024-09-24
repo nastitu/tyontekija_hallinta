@@ -11,9 +11,11 @@ from django.http import JsonResponse
 
 def index(request):
     työntekijät=Työntekijä.objects.all()
-
+    kunnat=Kunta.objects.all().order_by('nimi')
     context={
-        'tyontekijat':työntekijät
+        'tyontekijat':työntekijät,
+        'kunnat':kunnat
+
     }
     return render(request, "index.html", context)
 
@@ -75,12 +77,12 @@ def lataa_kunnat(request):
     }
     return render(request, 'kunta_lista.html', context)
 
-def lataa_kaikki_kunnat(request):
-    kunnat=Kunta.objects.all().order_by('nimi')
-    context={
-        'kunnat':kunnat
-    }
-    return render(request, 'k_kunta_lista.html', context)
+# def lataa_kaikki_kunnat(request):
+#     kunnat=Kunta.objects.all().order_by('nimi')
+#     context={
+#         'kunnat':kunnat
+#     }
+#     return render(request, 'k_kunta_lista.html', context)
 
 def lataa_työpisteet(request):
     kunta_id=request.GET.get('työkunta')
