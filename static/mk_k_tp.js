@@ -80,23 +80,76 @@ $(document).ready(function(){
       // console.log(milloin)
       // console.log(valittu)
       console.log(tanaan);
-      if(entinen){
+
+
+      // if(entinen){
+      //   table
+      //   .column(3)
+      //   .search((d) => new Date(d) < tanaan);
+      // }
+
+      // if(nykyinen){
+      //   table
+      //   .column(2)
+      //   .search((d) => new Date(d) <= tanaan)
+      //   .column(3)
+      //   .search((d) => new Date(d) >= tanaan || d=="");
+      // }
+      // if(tuleva){
+      //   table
+      //   .column(2)
+      //   .search((d) => new Date(d) > tanaan);
+      // }
+
+      if(entinen && nykyinen && tuleva){
+        table.column(2).search("").column(3).search(""); 
+      }else if(!entinen && nykyinen && tuleva){
         table
-      .column(3)
-      .search((d) => new Date(d) < tanaan);
-      }
-      if(nykyinen){
+        .column(3)
+        .search((d) => new Date(d) >= tanaan || d=="");
+      }else if(entinen && !nykyinen && tuleva){//////////Ei toimi
+        
+        var aloitus;
+        table.column(2).search((d) => {
+          aloitus = new Date(d);
+          return aloitus != tanaan; // Tämä palauttaa true, jos aloitus on ennen tai jälkeen
+        }).column(3).search((d) => {
+          const lopetus = new Date(d);
+          if (aloitus>tanaan){
+            return ( lopetus > tanaan) || (lopetus === ""); // Ennen tai tyhjää
+          }else{
+            return ( lopetus < tanaan);
+          }
+          
+        
+        });
+
+        console.log(aloitus);
+
+
+      }else if(entinen && nykyinen && !tuleva){
         table
         .column(2)
-        .search((d) => new Date(d) < tanaan)
-        .column(3)
-        .search((d) => new Date(d) > tanaan || d=="");
-      }
-      if(tuleva){
+        .search((d) => new Date(d) <= tanaan)
+      }else if(entinen && !nykyinen && !tuleva){
         table
-      .column(2)
-      .search((d) => new Date(d) > tanaan);
+        .column(3)
+        .search((d) => new Date(d) < tanaan);
+      }else if(!entinen && nykyinen && !tuleva){
+        table
+        .column(2)
+        .search((d) => new Date(d) <= tanaan)
+        .column(3)
+        .search((d) => new Date(d) >= tanaan || d=="");
+      }else if(!entinen && !nykyinen && tuleva){
+        table
+        .column(2)
+        .search((d) => new Date(d) > tanaan);
+      }else if(!entinen && !nykyinen && !tuleva){
+        table.column(2).search("1=0").column(3).search("1=0"); // Tyhjennetään taulukko
       }
+
+  
       table.draw();
 
     });
