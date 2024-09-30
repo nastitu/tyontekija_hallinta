@@ -9,125 +9,58 @@
 
 {% if user.is_authenticated %}
 
-<select class="form-select" id="kuntaValikko" aria-label="Default select example">
-  <option value="">Kaikki kunnat</option>
-  {% for k in kunnat %}
-  <option>{{ k.nimi }}</option>
-  {% endfor %}
-
-</select>
-
-<br>
-<br>
-
-<div class="form-check">
-  <input class="form-check-input tyosuhdeInput" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="" checked>
-  <label class="form-check-label" for="flexRadioDefault1">
-    kaikki
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input tyosuhdeInput" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="vakituinen" >
-  <label class="form-check-label" for="flexRadioDefault2">vakituinen</label>
-</div>
-<div class="form-check">
-  <input class="form-check-input tyosuhdeInput" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="määräaikainen">
-  <label class="form-check-label" for="flexRadioDefault3">määräaikainen</label>
-</div>
-
-<br>
-<br>
-
-<div class="form-check">
-  <input class="form-check-input aikaInput" type="checkbox" value="e" id="entinen" checked>
-  <label class="form-check-label" for="entinen">
-    Entinen
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input aikaInput" type="checkbox" value="n" id="nykyinen" checked>
-  <label class="form-check-label" for="nykyinen">
-    Nykyinen
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input aikaInput" type="checkbox" value="t" id="tuleva" checked>
-  <label class="form-check-label" for="tuleva">
-    Tuleva
-  </label>
-</div>
-
-
-{% comment %} <div class="form-check">
-  <input class="form-check-input aikaInput" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="entinen">
-  <label class="form-check-label" for="flexRadioDefault1">
-    entinen
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input aikaInput" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="nykyinen" checked>
-  <label class="form-check-label" for="flexRadioDefault2">nykyinen</label>
-</div>
-<div class="form-check">
-  <input class="form-check-input aikaInput" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="tuleva">
-  <label class="form-check-label" for="flexRadioDefault3">tuleva</label>
-</div> {% endcomment %}
-
-<br>
-<br>
-
- {% comment %} <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>  {% endcomment %}
-
- {% comment %} <table id="tyontekijatTable" class="display table table-striped table-hover">
-    <thead>
-      <tr>
-        
-        <th scope="col">Sukunimi</th>
-        <th scope="col">Etunimi</th>
-        <th scope="col">Työtehtävä</th>
-        <th scope="col">Työkunta</th>
-        <th scope="col">Työpiste</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-
-    
-    <tbody>
-      {% for t in tyontekijat %}
-      <tr>
-       
-        <td>{{t.sukunimi}}</td>
-        <td>{{t.etunimi}}</td>
-        <td>{{t.työtehtävä}}</td>
-        
-        <td>{% if t.työkunta == None %}-{% else %}{{t.työkunta}}{% endif %}</td>
-        
-        <td>{% if t.työpiste == None %}-{% else %}{{t.työpiste}}{% endif %}</td>
-        <td><a class="btn btn-primary" href="{% url "muokkaa_t" t.id %}" role="button">Lisätietoja</a></td>
-        
-      </tr>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <select class="form-select" id="kuntaValikko">
+        <option value="">Kaikki kunnat</option>
+        {% for k in kunnat %}
+        <option>{{ k.nimi }}</option>
+        {% endfor %}
       
-      {% endfor %}
-    </tbody>
-    
-  </table>  {% endcomment %}
- <br>
- <br>
- <br>
+      </select>
+    </div>
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input tyosuhdeInput" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="" checked>
+        <label class="form-check-label" for="flexRadioDefault1">Kaikki</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input tyosuhdeInput" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="vakituinen" >
+        <label class="form-check-label" for="flexRadioDefault2">Vakituinen</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input tyosuhdeInput" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="määräaikainen">
+        <label class="form-check-label" for="flexRadioDefault3">Määräaikainen</label>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-check">
+        <input class="form-check-input aikaInput" type="checkbox" value="e" id="entinen" checked>
+        <label class="form-check-label" for="entinen">
+          Entinen
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input aikaInput" type="checkbox" value="n" id="nykyinen" checked>
+        <label class="form-check-label" for="nykyinen">
+          Nykyinen
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input aikaInput" type="checkbox" value="t" id="tuleva" checked>
+        <label class="form-check-label" for="tuleva">
+          Tuleva
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <table id="tTable" class="display table table-striped table-hover" data-t-url="{% url 'hae_t' %}">
     <thead>
       <tr>
-        {% comment %} <th scope="col">#</th> {% endcomment %}
         <th scope="col">Sukunimi</th>
         <th scope="col">Etunimi</th>
         <th scope="col">Aloitus pvm</th>
@@ -136,8 +69,7 @@
         <th scope="col">Työtehtävä</th>
         <th scope="col">Työkunta</th>
         <th scope="col">Työpiste</th> 
-        <th scope="col">Toiminnot</th> 
-        {% comment %} <th scope="col"></th> {% endcomment %}
+        <th scope="col"></th> 
       </tr>
     </thead>
 

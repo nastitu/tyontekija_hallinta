@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Helsinki' ### Ajantasalle
+TIME_ZONE = 'Europe/Helsinki' #Aika ajantasalle
 
 USE_I18N = True
 

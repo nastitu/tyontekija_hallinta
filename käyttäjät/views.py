@@ -45,6 +45,7 @@ def luo_tili(request):
 
     return render(request, "luo_tili.html", context)
 
+@login_required
 def salasana_vaihto(request):
     if request.method == "POST":
         form=PasswordChangeForm(request.user, request.POST)

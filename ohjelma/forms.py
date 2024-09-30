@@ -27,7 +27,7 @@ class TyöntekijäForm(ModelForm):
         elif self.instance.pk: #kun työntekijä tiedossa
             try:
                 self.fields['työkunta'].queryset = self.instance.työmaakunta.kunta_set.order_by('nimi')
-            except (AttributeError): #tämä koska ei tykkää null arvoista työmaakunnassa  ja työkunnassa
+            except (AttributeError): #tämä koska ei tykkää null arvoista työmaakunnassa ja työkunnassa
                 pass 
         self.fields['työpiste'].queryset = Työpiste.objects.none() #nollataan työpiste
         if 'työkunta' in self.data:
@@ -39,7 +39,7 @@ class TyöntekijäForm(ModelForm):
         elif self.instance.pk: #kun työntekijä tiedossa
             try:
                 self.fields['työpiste'].queryset = self.instance.työkunta.työpiste_set.order_by('nimi')
-            except (AttributeError):   #tämä koska ei tykkää null arvoista työkunnassa  ja työpisteessä
+            except (AttributeError):   #tämä koska ei tykkää null arvoista työkunnassa ja työpisteessä
                 pass 
     
     def clean(self): #Tarkastetaan että lopetus on aloituksen jälkeen
@@ -54,14 +54,3 @@ class TyöntekijäForm(ModelForm):
 
 
 
-    
-# class MaakuntaForm(forms.Form):
-#     maakunta = forms.ModelChoiceField(queryset=Maakunta.objects.all(), empty_label="Valitse maakunta")
-
-# class KuntaForm(forms.Form):
-#     kunta = forms.ModelChoiceField(queryset=Kunta.objects.none(), empty_label="Valitse kunta")
-
-# class KuntaForm(ModelForm):
-#     class Meta:
-#         model = Kunta
-#         fields ="__all__"

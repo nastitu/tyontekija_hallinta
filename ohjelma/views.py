@@ -77,12 +77,6 @@ def lataa_kunnat(request):
     }
     return render(request, 'kunta_lista.html', context)
 
-# def lataa_kaikki_kunnat(request):
-#     kunnat=Kunta.objects.all().order_by('nimi')
-#     context={
-#         'kunnat':kunnat
-#     }
-#     return render(request, 'k_kunta_lista.html', context)
 
 def lataa_työpisteet(request):
     kunta_id=request.GET.get('työkunta')
@@ -103,6 +97,5 @@ def hae_tyontekijat(request):
                                                 'työpiste__nimi',
                                                 'id')
     data=list(tyontekijat)
-    #print(data)
-    #print (JsonResponse(data,safe=False))
+
     return JsonResponse(data, safe=False)
