@@ -1,21 +1,21 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <h1>Kirjaudu</h1>
-
+<br>
 <form method="POST">
     {% csrf_token %}
+
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label">Käyttäjätunnus</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="username" name="username">
+        <input type="text" id="username" name="username">
       </div>
     </div>
     <div class="row mb-3">
       <label class="col-sm-2 col-form-label">Salasana</label>
       <div class="col-sm-5">
-        <input type="password" class="form-control" id="password" name="password">
+        <input type="password" id="password" name="password">
       </div>
     </div>
 
