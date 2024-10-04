@@ -17,7 +17,6 @@ def index(request):
         'tyontekijat':työntekijät,
         'kunnat':kunnat
     }
-
     return render(request, "index.html", context)
 
 #uuden työntekijän lisäys
@@ -72,7 +71,7 @@ def poista_työntekijä(request, pk):
     messages.success(request, "Työntekijä poistettu!")
     return redirect("index")
 
-#Kuntien haku valikkoa varten
+#Kuntien haku valikkoa varten työntekijä sivulle
 def lataa_kunnat(request):
     maakunta_id=request.GET.get('työmaakunta')
     kunnat=Kunta.objects.filter(maakunta_id=maakunta_id).order_by('nimi')
@@ -81,7 +80,7 @@ def lataa_kunnat(request):
     }
     return render(request, 'kunta_lista.html', context)
 
-#työpisteiden haku valikkoa varten
+#työpisteiden haku valikkoa varten työntekijä sivulle
 def lataa_työpisteet(request):
     kunta_id=request.GET.get('työkunta')
     työpisteet=Työpiste.objects.filter(kunta_id=kunta_id).order_by('nimi')
