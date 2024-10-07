@@ -11,9 +11,9 @@ def kirjaudu_sisään(request):
     if request.method == "POST":
         nimi=request.POST["username"]
         salasana=request.POST["password"]
-        käyttäjä=authenticate(request, username=nimi, password=salasana)
+        käyttäjä=authenticate(request, username=nimi, password=salasana) #yritetään käyttäjän autentikointia annetuilla käyttäjätunnuksella ja salasanalla
         if käyttäjä is not None:#jos autentikointi onnistui
-            login(request, käyttäjä)
+            login(request, käyttäjä) #käyttäjän sisäänkirjaus
             messages.success(request, "Olet nyt kirjautunut sisään!")
             return redirect("index")
         else:
@@ -53,9 +53,9 @@ def luo_tili(request):
 def salasana_vaihto(request):
     if request.method == "POST":
         form=PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
+        if form.is_valid(): #tarkistaa että salasanat ovat samat
             form.save()
-            update_session_auth_hash(request, form.user) #ei tarvitse kirjautua uudelleen sisään
+            update_session_auth_hash(request, form.user) #ettei tarvitse kirjautua uudelleen sisään
             messages.success(request, "Salasanan vaihto onnistui")
             return redirect("index")
         else:

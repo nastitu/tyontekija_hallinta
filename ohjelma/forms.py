@@ -21,7 +21,7 @@ class TyöntekijäForm(ModelForm):
         if 'työmaakunta' in self.data:
             try:
                 maakunta_id = int(self.data.get('työmaakunta'))
-                self.fields['työkunta'].queryset = Kunta.objects.filter(maakunta_id=maakunta_id).order_by('nimi')
+                self.fields['työkunta'].queryset = Kunta.objects.filter(maakunta_id=maakunta_id).order_by('nimi') 
             except (ValueError, TypeError):
                 pass  
         elif self.instance.pk: #kun työntekijä tiedossa
@@ -42,12 +42,13 @@ class TyöntekijäForm(ModelForm):
             except (AttributeError):   #tämä koska ei tykkää null arvoista työkunnassa ja työpisteessä
                 pass 
     
+
     def clean(self): #Tarkastetaan että lopetus on aloituksen jälkeen
         puhdistettu_data =super().clean()
         aloitus=puhdistettu_data.get("aloitus_pvm")
         lopetus=puhdistettu_data.get("lopetus_pvm")
 
-        if lopetus is not None:
+        if lopetus is not None: #jos lopetus tyhjä niin se on joskus tulevaisuudessa
             if lopetus < aloitus:
                 raise ValidationError("Lopetuksen täytyy olla aloituksen jälkeen")
 
