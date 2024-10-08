@@ -6,7 +6,7 @@ $(document).ready(function(){
 
   var taulu= $('#tTable').DataTable({
     language: {
-      url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json',
+      url: 'https://cdn.datatables.net/plug-ins/2.1.5/i18n/fi.json', //suomennos
     },
     ajax: {
       url: urltaulu, 
@@ -59,7 +59,7 @@ $(document).ready(function(){
 
   //suodatus kunnan mukaan
   $('#kuntaValikko').on('change', function(){
-    taulu.column(6).search(this.value).draw();   
+    taulu.column(7).search(this.value).draw();   
   });
 
 
