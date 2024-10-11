@@ -29,24 +29,24 @@ def kirjaudu_ulos(request):
     messages.success(request, "Kirjauduttu ulos")
     return redirect("index")
 
-#Uuden käyttäjätilin luonti
-def luo_tili(request):
-    if request.method == "POST":
-        form= UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Tilin luonti onnistui!")
-            return redirect("index")
-        else:
-            messages.error(request, "Jotain meni pieleen, kokeile uudelleen")       
-    else:
-        form= UserCreationForm()
+# #Uuden käyttäjätilin luonti
+# def luo_tili(request):
+#     if request.method == "POST":
+#         form= UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, "Tilin luonti onnistui!")
+#             return redirect("index")
+#         else:
+#             messages.error(request, "Jotain meni pieleen, kokeile uudelleen")       
+#     else:
+#         form= UserCreationForm()
     
-    context={
-        "form":form
-    }
+#     context={
+#         "form":form
+#     }
 
-    return render(request, "luo_tili.html", context)
+#     return render(request, "luo_tili.html", context)
 
 #Käyttäjän salasanan vaihto
 @login_required

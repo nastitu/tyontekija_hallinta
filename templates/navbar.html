@@ -30,8 +30,8 @@
             <li><a class="dropdown-item" href="{% url "käyttäjät:ulos" %}">Kirjaudu ulos</a></li>
             {% else %}
             
-            <li><a class="dropdown-item" href="{% url "käyttäjät:luo_tili" %}">Luo tili</a></li>
-            <li><hr class="dropdown-divider"></li>
+            {% comment %} <li><a class="dropdown-item" href="{% url "käyttäjät:luo_tili" %}">Luo tili</a></li>
+            <li><hr class="dropdown-divider"></li> {% endcomment %}
             <li><a class="dropdown-item" href="{% url "käyttäjät:sisaan" %}">Kirjaudu sisään</a></li>
             
             {% endif %}
