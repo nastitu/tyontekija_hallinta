@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv() #.env-tiedoston käyttö
+load_dotenv(os.path.join(BASE_DIR, ".env")) #.env-tiedoston käyttö
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-ALLOWED_HOSTS += os.environ.get("ALLOWED_HOSTS").split()
+ALLOWED_HOSTS += os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
