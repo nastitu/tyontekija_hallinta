@@ -93,6 +93,7 @@ class TestModels(TestCase):
     
     
 class TestViews(TestCase):
+    @classmethod
     def setUpTestData(cls):
         cls.user = USER_MODEL.objects.create_user(
             username='user123',
@@ -100,22 +101,36 @@ class TestViews(TestCase):
         )
 
     # def setUp(self):
-    #     pass
+    #     self.user = USER_MODEL.objects.create_user(
+    #         username='user123',
+    #         password='password456'
+    #     )
     
     def test_index(self):
+        '''Testaa että aloitus toimii'''
         url=reverse('index')
         response=self.client.get(url)
 
         self.assertEqual(response.status_code,200)
 
     def test_lisaa_tyontekija(self):
+        '''Testaa että lisäys toimii kun logattuna sisään'''
         self.client.force_login(self.user)
 
         url=reverse('lisaa_t')
         response=self.client.get(url)
 
         self.assertEqual(response.status_code,200)
+        self.assertTemplateUsed(response, 'tyontekija.html')
 
+    def test_kirjauduttuna_ulos_lisays(self):
+        '''Testaa että kun logattuna ulos, niin lisäys ei onnistu vaan
+        uudelleenohjaa'''
+        url=reverse('lisaa_t')
+        response=self.client.get(url)
+
+        self.assertEqual(response.status_code,302)
+        
     def test_muokkaa_tyontekijaa(self):
         pass
 
