@@ -12,27 +12,27 @@
         {% if user.is_authenticated %}
         
         <li class="nav-item">
-          <a class="nav-link" href="{% url "lisaa_t" %}">Lisää työntekijä</a>
+          <a class="nav-link" id="lisaaTyontekija" href="{% url "lisaa_t" %}">Lisää työntekijä</a>
         </li>
       
         {% endif %}
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="kayttajatili" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Käyttäjätili{% if user.is_authenticated %}: {{request.user.username}}{% endif %}
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             {% if user.is_authenticated %}
 
-            <li><a class="dropdown-item" href="{% url "käyttäjät:salasana_vaihto" %}">Vaihda salasana</a></li>
+            <li><a class="dropdown-item" id="vaihdaSalasana" href="{% url "käyttäjät:salasana_vaihto" %}">Vaihda salasana</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url "käyttäjät:ulos" %}">Kirjaudu ulos</a></li>
+            <li><a class="dropdown-item" id="kirjauduUlos" href="{% url "käyttäjät:ulos" %}">Kirjaudu ulos</a></li>
             {% else %}
             
             {% comment %} <li><a class="dropdown-item" href="{% url "käyttäjät:luo_tili" %}">Luo tili</a></li>
             <li><hr class="dropdown-divider"></li> {% endcomment %}
-            <li><a class="dropdown-item" href="{% url "käyttäjät:sisaan" %}">Kirjaudu sisään</a></li>
+            <li><a class="dropdown-item" id="kirjauduSisaan" href="{% url "käyttäjät:sisaan" %}">Kirjaudu sisään</a></li>
             
             {% endif %}
           </ul>
