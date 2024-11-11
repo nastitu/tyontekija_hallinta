@@ -5,10 +5,10 @@
     {% csrf_token %}
     {{form.as_p }}
 
-    <button class="btn btn-primary" type="submit">Tallenna</button>
-    <a class="btn btn-primary" href="{% url "index" %}" role="button">Takaisin</a>
+    <button class="btn btn-primary" id="nappulaTallenna" type="submit">Tallenna</button>
+    <a class="btn btn-primary" id="nappulaTakaisin" href="{% url "index" %}" role="button">Takaisin</a>
     {% if t != None %}
-    <a class="btn btn-warning" href="{% url "poista_t" t.id  %}" role="button">Poista työntekijä</a>
+    <a class="btn btn-warning" id="nappulaPoista" href="{% url "poista_t" t.id  %}" role="button">Poista työntekijä</a>
     {% endif %}
 </form>
 
