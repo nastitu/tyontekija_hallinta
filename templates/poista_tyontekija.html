@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Poista työntekijä</h1>
+<br>
+<form method="POST">
+    {% csrf_token %}
+
+    <h3>Haluatko todella poistaa työntekijän:</h3>
+    <h5> {{t.sukunimi}}, {{t.etunimi}}</h5>
+    <br>
+    <button type="submit" id="nappulaSubmit" class="btn btn-primary">Kyllä</button>
+    <a class="btn btn-primary" id="nappulaTakaisin" href="{% url "muokkaa_t" t.id %}" role="button">Ei</a>
+</form>
+
+{% endblock content %}

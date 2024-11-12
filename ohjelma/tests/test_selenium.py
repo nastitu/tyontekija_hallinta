@@ -110,7 +110,7 @@ class TestSelenium(StaticLiveServerTestCase):
 
         time.sleep(2)
         #kirjaudutaan ulos
-
+        self.assertEqual(self.selain.title,'Työntekijähallinta')
 
     def test_tyontekijan_lisaus(self):
         self.selain.get(self.live_server_url)
@@ -248,15 +248,24 @@ class TestSelenium(StaticLiveServerTestCase):
 
         poisto_nappi=self.selain.find_element(By.ID, "nappulaPoista") 
         poisto_nappi.click()
+
+        takaisin=self.selain.find_element(By.ID, "nappulaTakaisin")
+        takaisin.click()
+
+        self.selain.execute_script("window.scrollTo(0, document.body.scrollHeight)") 
+        time.sleep(2)       
+        poisto_nappi=self.selain.find_element(By.ID, "nappulaPoista") 
+        poisto_nappi.click()
+
+        submit=self.selain.find_element(By.ID, "nappulaSubmit")
+        submit.click()
         time.sleep(5)
 
         rivit=self.selain.find_elements(By.TAG_NAME, "tr")
-        
-        #sar_arvot=self.selain.find_elements(By.TAG_NAME, "td")
 
         self.assertEqual(len(rivit),2)
-        # self.assertEqual(sar_arvot[0], "Jokinen")
-        self.assertEqual(self.selain.title,'Työntekijähallinta')
+        self.assertTrue("Jokinen" in self.selain.page_source)
+
 
     def test_lisays_ei_toimi_kun_vaarat_arvot(self):
         self.selain.get(self.live_server_url)
@@ -309,7 +318,7 @@ class TestSelenium(StaticLiveServerTestCase):
         sel_tmkunta=Select(tmkunta)
         sel_tmkunta.select_by_index(1)
         sel_tkunta=Select(tkunta)
-        sel_tkunta.select_by_index(1)
+        sel_tkunta.select_by_index(2)
         sel_tpiste=Select(tpiste)
         sel_tpiste.select_by_index(1)
 
@@ -319,5 +328,4 @@ class TestSelenium(StaticLiveServerTestCase):
         tallenna_nappi.click()
         time.sleep(2)
         
-
-        #self.assertEqual()
+        self.assertTrue("Lopetuksen täytyy olla aloituksen jälkeen" in self.selain.page_source)

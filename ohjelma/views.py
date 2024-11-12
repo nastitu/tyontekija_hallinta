@@ -62,9 +62,14 @@ def muokkaa_työntekijää(request, pk):
 @login_required
 def poista_työntekijä(request, pk):
     työntekijä=Työntekijä.objects.get(pk=pk) # haetaan työntekijä pääavaimen avulla
-    työntekijä.delete() #poistetaan
-    messages.success(request, "Työntekijä poistettu!") #info poistosta
-    return redirect("index") #pääsivulle
+    if request.method == "POST": #Kun on painettu poistamisen varmistamisnappia
+        työntekijä.delete() #poistetaan
+        messages.success(request, "Työntekijä poistettu!") #info poistosta
+        return redirect("index") #pääsivulle
+    context={
+        't':työntekijä
+    }
+    return render(request, "poista_tyontekija.html", context) 
 
 #Kuntien haku valikkoa varten työntekijä sivulle
 def lataa_kunnat(request):
