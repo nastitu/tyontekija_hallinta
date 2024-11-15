@@ -198,7 +198,7 @@ class TestSelenium(StaticLiveServerTestCase):
         enimi.send_keys("Matti")
         snimi.send_keys("Virtanen")
         puh.send_keys("234567890")
-        email.send_keys("mattimeik@email.fi")
+        email.send_keys("mattivirt@email.fi")
         kosoite.send_keys("Iltakatu 3 A 17")
         pnumero.send_keys("34567")
         ptpaikka.send_keys("Vantaa")

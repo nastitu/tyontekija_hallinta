@@ -72,6 +72,7 @@ def poista_työntekijä(request, pk):
     return render(request, "poista_tyontekija.html", context) 
 
 #Kuntien haku valikkoa varten työntekijä sivulle
+@login_required
 def lataa_kunnat(request):
     maakunta_id=request.GET.get('työmaakunta')
     kunnat=Kunta.objects.filter(maakunta_id=maakunta_id).order_by('nimi') #haetaan vain valitun maakunnan kunnat, järjestellään nimen mukaan
@@ -81,6 +82,7 @@ def lataa_kunnat(request):
     return render(request, 'kunta_lista.html', context)
 
 #työpisteiden haku valikkoa varten työntekijä sivulle
+@login_required
 def lataa_työpisteet(request):
     kunta_id=request.GET.get('työkunta')
     työpisteet=Työpiste.objects.filter(kunta_id=kunta_id).order_by('nimi') #haetaan vain valitun kunnan työpisteet, järjestellään nimen mukaan
@@ -90,6 +92,7 @@ def lataa_työpisteet(request):
     return render(request, 'tyopiste_lista.html', context)
 
 #Työntekijöiden tietojen haku
+@login_required
 def hae_tyontekijat(request):
     tyontekijat=Työntekijä.objects.all().values('sukunimi',
                                                 'etunimi',
